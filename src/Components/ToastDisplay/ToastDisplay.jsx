@@ -5,11 +5,14 @@ import "./ToastDisplay.scss";
 
 const ToastDisplay = ({toast, deleteToast}) => {
 	useEffect(() => {
-		const interval = setInterval(() => {
-			if (toast) {
-				deleteToast(toast.id);
-			}
-		}, Number(toast.timeout));
+		const interval = setInterval(
+			() => {
+				if (toast) {
+					deleteToast(toast.id);
+				}
+			},
+			toast.timeout ? Number(toast.timeout) : 3000
+		);
 		return () => {
 			clearInterval(interval);
 		};
